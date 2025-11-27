@@ -1,0 +1,5 @@
+tabelas:
+
+preco_livro
+nome_livro
+quantidade_livro

@@ -10,6 +10,8 @@ from selenium.webdriver.support import expected_conditions as EC
 class Classes:
     def __init__(self, driver):
         self.driver = driver
+        self.nome_livros = {'Harry Potter e a Pedra Filosofal', 'Alice no Pais das Maravilhas'}
+        self.preco_livro = 0
         self.index = 0
         pass
 
@@ -35,9 +37,7 @@ class Classes:
         print('Aqui iremos pesquisar o livro...')
 
 
-        tipos_de_livros = {'Harry Potter e a Pedra Filosofal', 'Alice no Pais das Maravilhas'}
-
-        for tipo in tipos_de_livros:
+        for tipo in self.nome_livros:
             # ESSE PROJETO IRA PESQUISAR 2 TIPOS DE LIVROS DIFERENTES
             self.find_element_with_wait(By.XPATH, '//input[contains(@id, "twotabsearchtextbox")]').send_keys(tipo)
             time.sleep(1)
@@ -70,6 +70,22 @@ class Classes:
             index_tabela += 1
 
             preço_capa_dura = self.find_element_with_wait(By.XPATH, '//span[contains(@class, "a-price")]//span[contains(@class, "a-price-whole")]')
+            texto_do_preco_capa = preço_capa_dura.text
+
+            converter_para_int = int(texto_do_preco_capa)
+
+            print(converter_para_int)
+
+            if converter_para_int < 50 and converter_para_int > 20:
+                self.preco_livro = converter_para_int
+
+
+
+                print()
+
+
+
+
 
 
 
