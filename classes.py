@@ -13,6 +13,7 @@ class Classes:
         self.nome_livros = {'Harry Potter e a Pedra Filosofal', 'Alice no Pais das Maravilhas'}
         self.preco_livro = 0
         self.index = 0
+        self.titulo_do_livro = ''
         pass
 
     def find_element_with_wait(self, by, value, timeout=10, parent=None):
@@ -64,6 +65,8 @@ class Classes:
 
         index_tabela = 2
 
+        index_titulo = 1
+
         items_tabela = self.find_elements_with_wait(By.XPATH, f'//div[contains(@role, "listitem") and contains(@data-index, "{index_tabela}")]')
 
         for item in items_tabela:
@@ -74,10 +77,15 @@ class Classes:
 
             converter_para_int = int(texto_do_preco_capa)
 
-            print(converter_para_int)
+            print(f'Preço livro: {converter_para_int}R$')
 
             if converter_para_int < 50 and converter_para_int > 20:
                 self.preco_livro = converter_para_int
+
+                titulo_livro = self.find_element_with_wait(By.XPATH, f'(//a[contains(@class, "a-link-normal s-line-clamp-2")])[{index_titulo}]')
+                self.titulo_do_livro = titulo_livro.text
+
+                print(f'Titulo do livro: {titulo_livro.text}')
 
 
 
