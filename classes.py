@@ -14,6 +14,7 @@ class Classes:
         self.preco_livro = 0
         self.index = 0
         self.titulo_do_livro = ''
+        self.tipo_do_livro = ''
         pass
 
     def find_element_with_wait(self, by, value, timeout=10, parent=None):
@@ -71,9 +72,10 @@ class Classes:
 
         for item in items_tabela:
             index_tabela += 1
+            index_titulo += 1
 
-            preço_capa_dura = self.find_element_with_wait(By.XPATH, '//span[contains(@class, "a-price")]//span[contains(@class, "a-price-whole")]')
-            texto_do_preco_capa = preço_capa_dura.text
+            preco_capa_dura = self.find_element_with_wait(By.XPATH, f'(//span[contains(@class, "a-price")]//span[contains(@class, "a-price-whole")])[{index_titulo}]')
+            texto_do_preco_capa = preco_capa_dura.text
 
             converter_para_int = int(texto_do_preco_capa)
 
@@ -87,9 +89,12 @@ class Classes:
 
                 print(f'Titulo do livro: {titulo_livro.text}')
 
+                tipo_do_livro = self.find_element_with_wait(By.XPATH, f'(//a[contains(@class, "a-size-base a-link-normal s-underline-")])[{index_titulo}]')
+                self.tipo_do_livro = tipo_do_livro.text
+
+                print(f'Tipo do livro: {tipo_do_livro.text}')
 
 
-                print()
 
 
 
