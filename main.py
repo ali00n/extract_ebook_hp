@@ -7,6 +7,9 @@ if __name__ == "__main__":
  config = Configuracoes()
  driver = config.iniciar_webdriver()
 
+ banco = BancoDeDados
+ banco.conexao_banco(driver)
+
  classes = Classes(driver)
 
  classes.entrar_site()
