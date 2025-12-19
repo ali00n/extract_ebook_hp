@@ -31,6 +31,14 @@ class Classes:
             EC.presence_of_all_elements_located((by, value))
         )
 
+    def atribuir_variaveis(self):
+        self.driver = driver
+        self.nome_livros = {'Harry Potter e a Pedra Filosofal', 'Alice no Pais das Maravilhas'}
+        self.preco_livro = 0
+        self.index = 0
+        self.titulo_do_livro = ''
+        self.tipo_do_livro = ''
+
     ''' FUNÇÃO APENAS PARA ENTRAR NO SITE '''
     def entrar_site(self):
         self.driver.get('https://www.amazon.com.br/Livros/b/?ie=UTF8&node=6740748011&ref_=nav_cs_books')
@@ -38,9 +46,10 @@ class Classes:
     def pesquisar_livro(self):
         print('Aqui iremos pesquisar o livro...')
 
-
         for tipo in self.nome_livros:
-            # ESSE PROJETO IRA PESQUISAR 2 TIPOS DE LIVROS DIFERENTES
+
+            '''ESSE PROJETO IRA PESQUISAR 2 TIPOS DE LIVROS DIFERENTES'''
+
             self.find_element_with_wait(By.XPATH, '//input[contains(@id, "twotabsearchtextbox")]').send_keys(tipo)
             time.sleep(1)
 
@@ -72,9 +81,10 @@ class Classes:
 
         for item in items_tabela:
             index_tabela += 1
-            index_titulo += 1
+
 
             preco_capa_dura = self.find_element_with_wait(By.XPATH, f'(//span[contains(@class, "a-price")]//span[contains(@class, "a-price-whole")])[{index_titulo}]')
+            index_titulo += 1
             texto_do_preco_capa = preco_capa_dura.text
 
             converter_para_int = int(texto_do_preco_capa)
