@@ -1,6 +1,6 @@
 from api import API
-from banco_de_dados import *
-from chrome_manager import *
+from banco_de_dados import BancoDeDados
+from chrome_manager import Configuracoes
 from classes import *
 
 class Main:
@@ -11,24 +11,20 @@ class Main:
         config = Configuracoes()
         driver = config.iniciar_webdriver()
 
-        banco = BancoDeDados(driver)
+        banco = BancoDeDados()
+        banco.conexao_banco()
 
-        api = API(driver, conexao)
-
+        api = API(banco.conexao)
         api.invoke_dados_livro()
 
-        banco.conexao_banco(driver)
-
         classes = Classes(driver)
-
         classes.entrar_site()
-
         classes.pesquisar_livro()
-
         classes.extracao()
 
 
 if __name__ == "__main__":
-    main = Main(conexao)
+    main = Main(None)
+    main.main()
 
 

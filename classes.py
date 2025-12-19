@@ -1,8 +1,6 @@
 import time
 
 from selenium.webdriver.common.by import By
-
-from main import *
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -10,11 +8,11 @@ from selenium.webdriver.support import expected_conditions as EC
 class Classes:
     def __init__(self, driver):
         self.driver = driver
-        self.nome_livros = {'Harry Potter e a Pedra Filosofal', 'Alice no Pais das Maravilhas'}
         self.preco_livro = 0
         self.index = 0
         self.titulo_do_livro = ''
         self.tipo_do_livro = ''
+        self.tipo_livro_um = ''
         pass
 
     def find_element_with_wait(self, by, value, timeout=10, parent=None):
@@ -32,7 +30,6 @@ class Classes:
         )
 
     def atribuir_variaveis(self):
-        self.driver = driver
         self.nome_livros = {'Harry Potter e a Pedra Filosofal', 'Alice no Pais das Maravilhas'}
         self.preco_livro = 0
         self.index = 0

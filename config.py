@@ -2,7 +2,7 @@
 from classes import *
 
 class Get_Tabelas:
-    def __init__(self):
+    def __init__(self, driver):
         self.driver = driver
         self.nome_livros = {'Harry Potter e a Pedra Filosofal', 'Alice no Pais das Maravilhas'}
         self.preco_livro = 0
