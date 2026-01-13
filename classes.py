@@ -7,13 +7,13 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class Classes:
     def __init__(self, driver):
+        self.nome_livros = ''
         self.driver = driver
         self.preco_livro = 0
         self.index = 0
         self.titulo_do_livro = ''
         self.tipo_do_livro = ''
         self.tipo_livro_um = ''
-        pass
 
     def find_element_with_wait(self, by, value, timeout=10, parent=None):
         if parent is None:
@@ -29,8 +29,22 @@ class Classes:
             EC.presence_of_all_elements_located((by, value))
         )
 
-    def atribuir_variaveis(self):
-        self.nome_livros = {'Harry Potter e a Pedra Filosofal', 'Alice no Pais das Maravilhas'}
+    def atribuir_variaveis(self, nomes_iteravel=None):
+        """Atribui as variáveis iniciais; se for passado um iterável de nomes, usa-o como `self.nome_livros`.
+
+        Args:
+            nomes_iteravel (iterable[str] | None): nomes de livros vindos do banco; se None usa conjunto padrão.
+        """
+        if nomes_iteravel:
+            try:
+                # converte para set para manter comportamento de iteração única
+                self.nome_livros = set(nomes_iteravel)
+            except Exception:
+                # fallback para string
+                self.nome_livros = nomes_iteravel
+        else:
+            self.nome_livros = {'Harry Potter e a Pedra Filosofal', 'Alice no Pais das Maravilhas'}
+
         self.preco_livro = 0
         self.index = 0
         self.titulo_do_livro = ''
@@ -100,30 +114,3 @@ class Classes:
                 self.tipo_do_livro = tipo_do_livro.text
 
                 print(f'Tipo do livro: {tipo_do_livro.text}')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
